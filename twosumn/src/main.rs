@@ -1,5 +1,5 @@
 use std::collections::HashMap;
-use crate::seerch::findme::{found_me, syntaxtice};
+use crate::seerch::findme::{found_me, sieve, syntaxtice};
 
 pub mod seerch;
 
@@ -39,4 +39,7 @@ fn main() {
     println!("{:#?}", better_two_sum(&nums, 3));
     found_me();
     syntaxtice();
+
+    let primes = sieve(200);
+    println!("Primes <= 50 : \n {:?}", primes);
 }
