@@ -67,7 +67,7 @@ pub fn is_anagram(s: String, t: String) -> bool {
     let mut hm: HashMap<char, i64> = HashMap::new();
 
     for i in s.chars() {
-        let mut key = hm.entry(i).or_insert(0);
+        let key = hm.entry(i).or_insert(0);
         *key += 1;
     }
     for j in t.chars() {
@@ -81,4 +81,40 @@ pub fn is_anagram(s: String, t: String) -> bool {
         }
     }
     true
+}
+
+pub fn length_of_longest_substring(s: String) -> i32 {
+    //double for loop
+    //move pt1 forward until first dupe
+    //log max len
+    //move pt2 forward
+    if s.is_empty() {
+        return 0;
+    }
+
+    let chars: Vec<char> = s.chars().collect();
+    let n = chars.len();
+    let mut max_len = 0;
+    for i in 0..n {
+        let mut seen: HashMap<char, u8> = HashMap::new();
+        let mut cur_len = 0;
+
+        for j in i..n {
+            let c = chars[j];
+            let counter = seen.entry(c).or_insert(0);
+            *counter += 1;
+
+            if *counter > 1 {
+                break;
+            }
+
+            cur_len += 1;
+        }
+
+        if cur_len > max_len {
+            max_len = cur_len;
+        }
+    }
+
+    max_len
 }
