@@ -10,12 +10,47 @@ pub fn found_me() {
 }
 
 pub fn syntaxtice() {
-    let mector = vec![1,7,10,20,4,5,7,244,56];
-    let see_this=Look {
+    let mector = vec![1, 7, 10, 20, 4, 5, 7, 244, 56];
+    let see_this = Look {
         stupid: mector,
         target: 245,
     };
     let meal = better_two_sum(&see_this.stupid, see_this.target);
 
-    println!("{:?}",meal);
+    println!("{:?}", meal);
+}
+fn is_prime(n: usize) -> bool {
+    // 0 and 1 are not prime
+    if n < 2 {
+        return false;
+    }
+    // 2 and 3 are prime
+    if n <= 3 {
+        return true;
+    }
+    // eliminate even numbers
+    if n % 2 == 0 {
+        return false;
+    }
+    // only check odd divisors up to √n
+    let limit = (n as f64).sqrt() as usize;
+    let mut i = 3;
+    while i <= limit {
+        if n % i == 0 {
+            return false;
+        }
+        i += 2;
+    }
+    true
+}
+pub fn sieve(n: usize) -> Vec<usize> {
+    //loop through all numbers while less than n
+    //check if its prime, then push into ans
+    let mut ans = Vec::new();
+    for i in 2..n {
+        if is_prime(i){
+            ans.push(i)
+        }
+    }
+    return ans;
 }
