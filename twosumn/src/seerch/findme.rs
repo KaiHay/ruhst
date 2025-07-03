@@ -1,3 +1,5 @@
+use std::collections::HashMap;
+
 use crate::better_two_sum;
 
 pub struct Look {
@@ -48,9 +50,32 @@ pub fn sieve(n: usize) -> Vec<usize> {
     //check if its prime, then push into ans
     let mut ans = Vec::new();
     for i in 2..n {
-        if is_prime(i){
+        if is_prime(i) {
             ans.push(i)
         }
     }
     return ans;
+}
+
+pub fn is_anagram(s: String, t: String) -> bool {
+    //declare hashmap which holds each character in the string
+    //loop through first word adding keys
+    //loop through second subtracting and if the key goes negative return false
+
+    let mut hm: HashMap<char, i64> = HashMap::new();
+    if s.len() != t.len() {
+        return false;
+    }
+    for i in s.chars() {
+        let key = hm.entry(i).or_insert(0);
+        *key += 1;
+    }
+    for j in t.chars() {
+        let key = hm.entry(j).or_insert(-1);
+        *key -= 1;
+        if *key < 0 {
+            return false;
+        }
+    }
+    true
 }
