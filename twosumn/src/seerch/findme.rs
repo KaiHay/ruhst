@@ -61,19 +61,22 @@ pub fn is_anagram(s: String, t: String) -> bool {
     //declare hashmap which holds each character in the string
     //loop through first word adding keys
     //loop through second subtracting and if the key goes negative return false
-
-    let mut hm: HashMap<char, i64> = HashMap::new();
     if s.len() != t.len() {
         return false;
     }
+    let mut hm: HashMap<char, i64> = HashMap::new();
+
     for i in s.chars() {
-        let key = hm.entry(i).or_insert(0);
+        let mut key = hm.entry(i).or_insert(0);
         *key += 1;
     }
     for j in t.chars() {
-        let key = hm.entry(j).or_insert(-1);
-        *key -= 1;
-        if *key < 0 {
+        if let Some(key) = hm.get_mut(&j) {
+            *key -= 1;
+            if *key < 0 {
+                return false;
+            }
+        } else {
             return false;
         }
     }
