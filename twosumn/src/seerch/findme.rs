@@ -10,7 +10,7 @@ pub struct Look {
 pub fn found_me() {
     println!("Found me! Hahaha")
 }
-
+//VECTOR PRACTICE -----------------------------------------
 pub fn syntaxtice() {
     let mector = vec![1, 7, 10, 20, 4, 5, 7, 244, 56];
     let see_this = Look {
@@ -45,6 +45,7 @@ fn is_prime(n: usize) -> bool {
     }
     true
 }
+
 pub fn sieve(n: usize) -> Vec<usize> {
     //loop through all numbers while less than n
     //check if its prime, then push into ans
@@ -56,7 +57,7 @@ pub fn sieve(n: usize) -> Vec<usize> {
     }
     return ans;
 }
-
+//HASHMAP PRACTICE-----------------------------------------------------------
 pub fn is_anagram(s: String, t: String) -> bool {
     //declare hashmap which holds each character in the string
     //loop through first word adding keys
@@ -68,10 +69,12 @@ pub fn is_anagram(s: String, t: String) -> bool {
 
     for i in s.chars() {
         let key = hm.entry(i).or_insert(0);
-        *key += 1;
+        //gets the key or inserts the key, returns the mutable reference to the key
+        *key += 1; //have to dereference the key to change its value
     }
     for j in t.chars() {
         if let Some(key) = hm.get_mut(&j) {
+            //if something declare key, if nothing go to the else 
             *key -= 1;
             if *key < 0 {
                 return false;
@@ -88,11 +91,13 @@ pub fn length_of_longest_substring(s: String) -> i32 {
     //move pt1 forward until first dupe
     //log max len
     //move pt2 forward
-    if s.is_empty() {
+
+    if s.is_empty() { //is empty is actually a vector function!
         return 0;
     }
 
-    let chars: Vec<char> = s.chars().collect();
+    //collect() can take anything iterable, and turn it into a relevant collection
+    let chars: Vec<char> = s.chars().collect(); 
     let n = chars.len();
     let mut max_len = 0;
     for i in 0..n {

@@ -1,5 +1,10 @@
-use std::collections::HashMap;
-use crate::seerch::findme::{found_me, sieve, syntaxtice};
+use twosumn::better_two_sum;
+
+use crate::seerch::{
+    findme::{found_me, sieve, syntaxtice},
+    lifetraits::longest_with_an_announcement,
+};
+
 
 pub mod seerch;
 
@@ -19,20 +24,8 @@ pub fn two_sum(nums: &Vec<i32>, target: i32) -> Vec<i32> {
     }
     ans
 }
-pub fn better_two_sum(nums: &Vec<i32>, target: i32) -> Vec<i32>{
-    let mut hash_map : HashMap<i32, i32> = HashMap::new();
-
-    for (i, &num) in nums.iter().enumerate(){
-        let complement = target - num;
-        if let Some(&numb) = hash_map.get(&complement) {
-            return vec![numb as i32, i as i32]
-        }
-        hash_map.insert(num,i as i32);
-    }
-    vec![]
 
 
-}
 fn main() {
     let nums = vec![1, 2, 3];
     println!("{:#?}", two_sum(&nums, 3));
@@ -42,4 +35,11 @@ fn main() {
 
     let primes = sieve(200);
     println!("Primes <= 50 : \n {:?}", primes);
+
+    let a: String = "poopy".to_string();
+    let b = ("duplex").to_string();
+
+    let longest = longest_with_an_announcement(&a, &b, "lol");
+    println!("Longest is: {}", longest);
 }
+
